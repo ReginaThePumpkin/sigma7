@@ -79,7 +79,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel 5.5 Version 2 COn algo nuevo
+                    Laravel 5.5 Titulo del nuevo commit de Master
                 </div>
 
                 <div class="links">
