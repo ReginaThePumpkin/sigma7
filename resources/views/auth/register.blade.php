@@ -11,29 +11,29 @@
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                        <div class="form-group{{ $errors->has('usuario_u') ? ' has-error' : '' }}">
+                            <label for="usuario_u" class="col-md-4 control-label">Name</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="usuario_u" type="text" class="form-control" name="usuario_u" value="{{ old('usuario_u') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('usuario_u'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('usuario_u') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('email_u') ? ' has-error' : '' }}">
+                            <label for="email_u" class="col-md-4 control-label">E-Mail Address</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email_u" type="email" class="form-control" name="email_u" value="{{ old('email_u') }}" required>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('email_u'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('email_u') }}</strong>
                                     </span>
                                 @endif
                             </div>
