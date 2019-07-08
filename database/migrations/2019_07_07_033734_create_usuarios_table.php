@@ -92,7 +92,8 @@ class CreateUsuariosTable extends Migration
 		    $table->unsignedTinyInteger('estatus_escolar_u')->nullable();
 		    $table->string('permisos_u', 50)->charset('latin1')->collation('latin1_spanish_ci')->default('00000000000000000000000000000000000000000000000');
 		    $table->unsignedMediumInteger('universidad_e_u')->nullable();
-		
+			
+			$table->rememberToken();
 		    $table->timestamps();
 		
         });
