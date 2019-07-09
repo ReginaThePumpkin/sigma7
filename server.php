@@ -1,5 +1,4 @@
 <?php
-//Quiero ver si puedo hacer aparecer este comentario
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
