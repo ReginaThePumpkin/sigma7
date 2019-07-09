@@ -1,4 +1,4 @@
-@extends('layouts.headerAndFooter')
+@extends('layouts.base')
 
 @section('titulo')
 PRINCIPAL
