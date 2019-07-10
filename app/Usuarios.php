@@ -17,7 +17,7 @@ class Usuarios extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id_u','usuario_u', 'email_u', 'password','nombre_u','apaterno_u', 'amaterno_u','acceso_u', 'sexo_u', 'idSucursal_u', 'multisucursal_u'
+        'id_u','usuario_u', 'email_u', 'password','nombre_u','apaterno_u', 'amaterno_u','acceso_u', 'sexo_u', 'idSucursal_u', 'multisucursal_u','permisos_u'
     ];
 
     /**
@@ -36,6 +36,12 @@ class Usuarios extends Authenticatable
     }
 
     public function getDataAttribute(){
+        $permisos = array();
+
+        for($a = 0; $a < 47 && $a < strlen($this->permisos_u); $a++){
+            $permisos[$a] = $this->permisos_u[$a];
+        }
+
         return array(
             'id' => $this->id_u,
             'usuario' => $this->usuario_u,
@@ -44,7 +50,8 @@ class Usuarios extends Authenticatable
             'acceso' => $this->acceso_u,
             'sexo' => $this->sexo_u,
             'sucursal' => $this->idSucursal_u,
-            'multisucursal' => $this->multisucursal_u
+            'multisucursal' => $this->multisucursal_u,
+            'permisos' => $permisos
         );
     }
 

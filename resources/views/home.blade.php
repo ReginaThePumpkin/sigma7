@@ -14,8 +14,13 @@ PRINCIPAL
         @endif
         {{ Auth::user()->data['fullname'].' '.Auth::user()->data['lastname']}}
     </h1>
+    <p>
+        @foreach(Auth::user()->data['permisos'] as $permiso)
+            {{$permiso.' '}}
+        @endforeach
+    </p>
 </p>
 
-<script>breadcrumb('<li class="active"><strong>HOME</strong></li>');</script>
+<script>breadcrumb(['HOME','RECEPCIÓN','AGENDA'],['index.php']);</script>
 
 @endsection
