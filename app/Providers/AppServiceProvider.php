@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+//!Usame si las migraciones no sirven: use Illuminate\Support\Facades\Schema;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //!Usame si las migraciones no sirven: Schema::defaultStringLength(191);
     }
 
     /**
@@ -26,3 +28,4 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
+

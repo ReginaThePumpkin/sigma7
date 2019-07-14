@@ -36,10 +36,14 @@ class Usuarios extends Authenticatable
     }
 
     public function getDataAttribute(){
-        $permisos = array();
+        $permisos = "";
 
-        for($a = 0; $a < 47 && $a < strlen($this->permisos_u); $a++){
-            $permisos[$a] = $this->permisos_u[$a];
+        for($a = 0; $a < 47; $a++){
+            if($a >= strlen($this->permisos_u)){
+                $permisos[$a] = "0";
+            }else{
+                $permisos[$a] = $this->permisos_u[$a];
+            }
         }
 
         return array(
