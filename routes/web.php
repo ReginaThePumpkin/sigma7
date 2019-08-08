@@ -21,3 +21,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 
+Route::get('/consultas', function(){
+    return view('consultas');
+})->middleware('auth')->name('consultas');
+

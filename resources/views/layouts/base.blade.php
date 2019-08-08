@@ -27,13 +27,16 @@
     <script src="{{asset('DataTables-1.10.13/extensions/Scroller/js/dataTables.scroller.min.js')}}"></script>
     <script src="{{asset('DataTables-1.10.13/extensions/Select/js/dataTables.select.min.js')}}"></script>
     <!-- Mis funciones -->
-    <!-- <script src="funciones/js/inicio.js"></script>
-    <script src="funciones/js/caracteres.js"></script>
-    <script src="funciones/js/modulos/pacientes.js"></script> -->
+    @yield('js')
+    <script src="{{asset('funciones/js/inicio.js')}}"></script>
+    <script src="{{asset('funciones/js/caracteres.js')}}"></script>
+    <script src="{{asset('funciones/js/modulos/pacientes.js')}}"></script>
 
     <!-- Funciones V7-->
     <script src="{{asset('js/main.js')}}"></script>
     
+    <!-- CSS-->
+    @yield('css')
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
@@ -107,7 +110,7 @@
                                 <i class="fa fa-stethoscope"></i> <span class="nav-label">CONSULTAS</span><span class="fa arrow"></span>
                             </a>
                             <ul class="nav nav-second-level collapse">
-                                @if($permisos[7]) <li style="white-space:nowrap;"><a href="consultas.php"><i class="fa fa-user-md"></i> CONSULTAS MÉDICAS</a></li> @endif
+                                @if($permisos[7]) <li style="white-space:nowrap;"><a href="{{route('consultas')}}"><i class="fa fa-user-md"></i> CONSULTAS MÉDICAS</a></li> @endif
                                 @if($permisos[8]) <li><a href="catalogo_consultas.php"><i class="fa fa-list-ol"></i> CATÁLOGO</a></li> @endif
                                 @if($permisos[9]) <li><a href="productividad_cst.php"><i class="fa fa-list-alt"></i> PRODUCTIVIDAD</a></li> @endif
                             </ul>
