@@ -1,9 +1,9 @@
 <?php
 
-namespace sigma7\Http\Controllers;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use sigma7\Http\Controllers\Controller;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -30,5 +30,9 @@ class UserController extends Controller
     }
     public function parseLogin(Request $request){
     	
-    }
+	}
+	
+	public function datatable(){
+		return datatables()->of(DB::table('usuarios'))->toJson();
+	}
 }

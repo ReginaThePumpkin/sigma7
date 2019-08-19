@@ -25,3 +25,7 @@ Route::get('/consultas', function(){
     return view('consultas');
 })->middleware('auth')->name('consultas');
 
+
+Route::view('','auth.login')->name('datatable');
+
+Route::get('/datatable','UserController@datatable')->name('datatable');
