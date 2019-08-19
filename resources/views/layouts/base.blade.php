@@ -28,6 +28,7 @@
     <script src="{{asset('DataTables-1.10.13/extensions/Select/js/dataTables.select.min.js')}}"></script>
     <!-- Mis funciones -->
     @yield('js')
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('funciones/js/inicio.js')}}"></script>
     <script src="{{asset('funciones/js/caracteres.js')}}"></script>
     <script src="{{asset('funciones/js/modulos/pacientes.js')}}"></script>
@@ -36,6 +37,7 @@
     <script src="{{asset('js/main.js')}}"></script>
     
     <!-- CSS-->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     @yield('css')
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -319,5 +321,7 @@
     <div id="myModalx" class="modal fade modal-fullscreen" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false"> </div>
 
 </body>
+
+@yield('borrame')
 
 </html>

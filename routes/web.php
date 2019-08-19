@@ -29,3 +29,5 @@ Route::get('/consultas', function(){
 Route::view('','auth.login')->name('datatable');
 
 Route::get('/datatable','UserController@datatable')->name('datatable');
+
+Route::any('/datatableData','UserController@datatableData')->name('datatables.data');

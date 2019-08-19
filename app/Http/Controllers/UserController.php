@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Usuarios;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -31,8 +33,11 @@ class UserController extends Controller
     public function parseLogin(Request $request){
     	
 	}
-	
 	public function datatable(){
-		return datatables()->of(DB::table('usuarios'))->toJson();
+		return view('datatables');
+	}
+	
+	public function datatableData(){
+		return datatables()->of(Usuarios::all())->toJson();
 	}
 }
