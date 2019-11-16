@@ -22,9 +22,10 @@
     <script src="{{asset('js/plugins/pace/pace.min.js')}}"></script>
     <script src="{{asset('DataTables-1.10.13/media/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('DataTables-1.10.13/media/js/dataTables.bootstrap.min.js')}}"></script>
-    <script src="{{asset('DataTables-1.10.13/extensions/Scroller/js/dataTables.scroller.min.js')}}"></script>
     <script src="{{asset('DataTables-1.10.13/extensions/Select/js/dataTables.select.min.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
+
+{{--    importanción de librerias unicas de cada página--}}
     @yield('libreriasJS')
     <!-- Mis funciones -->
     <!-- <script src="funciones/js/inicio.js"></script>
@@ -38,8 +39,9 @@
     <link href="{{asset('css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('DataTables-1.10.13/media/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('DataTables-1.10.13/extensions/Select/css/select.bootstrap.min.css')}}" rel="stylesheet">
+
+{{--    importanción de librerias unicas de cada página--}}
     @yield('libreriasCCS')
 </head>
 
@@ -206,7 +208,7 @@
                             </ul>
                         </li>
                         <li style="white-space:nowrap;"><a href="#"><i class="fa fa-hand-peace-o"></i> BENEFICIOS</a></li>
-                        <li><a href="{{route("formatos")}}"><i class="fa fa-book"></i> FORMATOS</a></li>
+                        <li><a href="{{route("administracion-formatos")}}"><i class="fa fa-book"></i> FORMATOS</a></li>
                         <li>
                             <a href="#"><i class="fa fa-list-alt"></i> CATÁLOGOS <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
