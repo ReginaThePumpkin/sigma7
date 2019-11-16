@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="SISTEMA DE EXPEDIENTE CLÍNICO ELECTRÓNICO">
-    <meta name="author" content="ING EMMANUEL ANZURES BAUTISTA">
+    <!--<meta name="author" content="ING EMMANUEL ANZURES BAUTISTA">-->
 
     <title>@yield('titulo')</title>
 
@@ -24,13 +24,14 @@
     <script src="{{asset('DataTables-1.10.13/media/js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('DataTables-1.10.13/extensions/Scroller/js/dataTables.scroller.min.js')}}"></script>
     <script src="{{asset('DataTables-1.10.13/extensions/Select/js/dataTables.select.min.js')}}"></script>
+    <script src="{{asset('js/main.js')}}"></script>
+    @yield('libreriasJS')
     <!-- Mis funciones -->
     <!-- <script src="funciones/js/inicio.js"></script>
     <script src="funciones/js/caracteres.js"></script>
     <script src="funciones/js/modulos/pacientes.js"></script> -->
 
     <!-- Funciones V7-->
-    <script src="{{asset('js/main.js')}}"></script>
     
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet">
@@ -39,6 +40,7 @@
     <link href="{{asset('DataTables-1.10.13/media/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('DataTables-1.10.13/extensions/Select/css/select.bootstrap.min.css')}}" rel="stylesheet">
+    @yield('libreriasCCS')
 </head>
 
 <body class="fixed-sidebar full-height-layout pace-done mini-navbar" style="overflow:hidden;">
@@ -149,12 +151,11 @@
                         <li><a href="productividad_ser.php"><i class="fa fa-list-alt"></i> PRODUCTIVIDAD</a></li>
                     </ul>
                 </li>
-                
                 <li class="hidden">
                     <a href="#">
                         <i class="fa fa-wheelchair"></i> <span class="nav-label">REHABILITACIÓN</span><span class="fa arrow"></span>
                     </a>
-                <ul class="nav nav-second-level collapse">
+                    <ul class="nav nav-second-level collapse">
                         <li style="white-space:nowrap;"><a href="#"><i class="fa fa-handshake-o"></i> TRABAJO SOCIAL</a></li>
                         <li style="white-space:nowrap;"><a href="#"><i class="fa fa-plus-square"></i> SERVICIOS MÉDICOS</a></li>
                         <li><a href="#"><i class="fa fa-list-alt"></i> REPORTES</a></li>
@@ -205,7 +206,7 @@
                             </ul>
                         </li>
                         <li style="white-space:nowrap;"><a href="#"><i class="fa fa-hand-peace-o"></i> BENEFICIOS</a></li>
-                        <li><a href="formatos.php"><i class="fa fa-book"></i> FORMATOS</a></li>
+                        <li><a href="{{route("formatos")}}"><i class="fa fa-book"></i> FORMATOS</a></li>
                         <li>
                             <a href="#"><i class="fa fa-list-alt"></i> CATÁLOGOS <span class="fa arrow"></span></a>
                             <ul class="nav nav-third-level collapse">
@@ -281,6 +282,8 @@
 	<div id="myModal3" class="modal fade" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false"> </div>
     <div id="myModal4" class="modal fade" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false"> </div>
     <div id="myModalx" class="modal fade modal-fullscreen" tabindex="-1" role="dialog" data-backdrop="false" data-keyboard="false"> </div>
+
+    @yield('scripts')
 
 </body>
 
