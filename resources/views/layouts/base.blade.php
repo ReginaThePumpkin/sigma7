@@ -149,7 +149,7 @@
                     <a href="#"><i class="fa fa-plus-square"></i><span class="nav-label"> SERVICIOS</span><span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level collapse">
                         <li style="white-space:nowrap;"><a href="servicios.php"><i class="fa fa-user-md"></i> SERVICIOS MÉDICOS</a></li>
-                        <li><a href="catalogo_servicios.php"><i class="fa fa-list-ol"></i> CATÁLOGO</a></li>
+                        <li><a href="{{route('servicios-catalogo')}}"><i class="fa fa-list-ol"></i> CATÁLOGO</a></li>
                         <li><a href="productividad_ser.php"><i class="fa fa-list-alt"></i> PRODUCTIVIDAD</a></li>
                     </ul>
                 </li>
