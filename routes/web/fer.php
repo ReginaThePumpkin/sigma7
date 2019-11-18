@@ -12,5 +12,14 @@ Route::post('/administracion/formatos/files-serverside/updateFormato', 'Administ
 
 // Seccion de servicios
 // Subseccion catalogo
-Route::get('servicios/catalogo', 'Servicios\CatalogoController@index')->name('servicios-catalogo');
-Route::get('servicios/catalogo/datatable-serverside/catalogo', 'Servicios\CatalogoController@getTableCatalogo');
+Route::get('/servicios/catalogo', 'Servicios\CatalogoController@index')->name('servicios-catalogo');
+Route::get('/servicios/catalogo/datatable-serverside/catalogo', 'Servicios\CatalogoController@getTableCatalogo');
+Route::get('/servicios/catalogo/genera_sucursales_ov', 'Servicios\CatalogoController@getSucursales');
+Route::get('/servicios/catalogo/genera/inserciones', 'Servicios\CatalogoController@inserciones');
+Route::get('/servicios/catalogo/htmls/ficha_servicio_m', 'Servicios\CatalogoController@getFichaServicio');
+Route::post('/servicios/catalogo/files-serverside/datosSucursalU', 'Servicios\CatalogoController@datosSucursal');
+Route::post('/servicios/catalogo/files-serverside/check_formato', 'Servicios\CatalogoController@check_formato');
+Route::post('/servicios/catalogo/files-serverside/check_formato_individual', 'Servicios\CatalogoController@check_formato_individual');
+Route::post('/servicios/catalogo/files-serverside/addServicio_m', 'Servicios\CatalogoController@addServicio_m');
+Route::post('/servicios/catalogo/files-serverside/updateServicio_m', 'Servicios\CatalogoController@updateServicio_m');
+Route::post('/servicios/catalogo/files-serverside/fichaEstudio', 'Servicios\CatalogoController@fichaEstudio');

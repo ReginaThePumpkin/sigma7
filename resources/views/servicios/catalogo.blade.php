@@ -82,6 +82,7 @@
             //breadcrumb
             $('#breadc').html('<li><a href="index.php">HOME</a></li><li>SERVICIOS</li><li class="active"><strong>CATÁLOGO DE SERVICIOS MÉDICOS</strong></li>');
 
+            $.fn.dataTable.ext.errMode = 'throw';
             $('#my_search').removeClass('hidden');
             //$.fn.datepicker.defaults.autoclose = true;
 
@@ -101,8 +102,9 @@
                     var acceso = $('#acc_user').val(); var idU = $('#id_user').val();
 
                     aoData.push( {"name": "nombre", "value": nombre } );
-                    aoData.push(  {"name": "accesoU", "value": acceso } );
-                    aoData.push(  {"name": "idU", "value": idU } ); aoData.push({"name": "idSu", "value": de });
+                    aoData.push( {"name": "accesoU", "value": acceso } );
+                    aoData.push( {"name": "idU", "value": idU } );
+                    aoData.push( {"name": "idSu", "value": de } );
                 },
                 "oLanguage": {
                     "sLengthMenu": "MONSTRANDO _MENU_ records per page", "sZeroRecords": "SIN COINCIDENCIAS - LO SENTIMOS",
@@ -112,7 +114,14 @@
                 },"iDisplayLength": 50000, paging: false,
             });
 
-            $('#clickme').click(function(e) { oTableP.draw(); }); window.setTimeout(function(){$('#clickme').click();},500);
+            $('#clickme').click(function(e) {
+                oTableP.draw();
+            });
+            window.setTimeout(function(){
+                $('#clickme').click();
+                },
+                500
+            );
 
             //para los fintros individuales por campo de texto
             oTableP.columns().every( function () {
@@ -128,27 +137,35 @@
             }).focus();
             $('.filtro1Principal').addClass('hidden');
 
-            $("#miSucursal").load('pacientes/genera/genera_sucursales_ov.php?idU='+$('#id_user').val(), function(response,status,xhr){
+            $("#miSucursal").load('catalogo/genera_sucursales_ov?idU='+$('#id_user').val(), function(response,status,xhr){
                 if (status = "success"){
-                    var datosUS = {idU:$('#id_user').val()}
-                    $.post('servicios/servicios/files-serverside/datosSucursalU.php',datosUS).done(function(data){
-                        $("#miSucursal").val(data); $('#clickme').click(); $("#miSucursal").change(function(e) { $('#clickme').click(); });
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    var datosUS = {_token:token, idU:$('#id_user').val()}
+                    $.post('catalogo/files-serverside/datosSucursalU',datosUS).done(function(data){
+                        $("#miSucursal").val(data);
+                        $('#clickme').click();
+                        $("#miSucursal").change(function(e) {
+                            $('#clickme').click();
+                        });
                     });
                 }
             });
         });
 
         function nuevoEstudio(){
-            $("#myModal").load("servicios/servicios/htmls/ficha_servicio_m.php",function(response,status,xhr){ if(status=="success"){ tinymce.remove("#input");
-                $(".insers").load('genera/inserciones.php', function( response, status, xhr ) { if ( status == "success" ) { } });
+            $("#myModal").load("catalogo/htmls/ficha_servicio_m",function(response,status,xhr){ if(status=="success"){ tinymce.remove("#input");
+                $(".insers").load('catalogo/genera/inserciones', function( response, status, xhr ) { if ( status == "success" ) { } });
                 //Checamos si hay formato de imagen en la sucursal del usuario logueado, sino entonces checamos si hay formato desde configuración, y sino dejar en blanco.
-                var datosFts ={idU:$('#id_user').val(), idSucursal:$('#miSucursal').val()}
-                $.post('servicios/files-serverside/check_formato.php',datosFts).done(function(data1){ $('#input').val(data1);
+
+                var token = $('meta[name="csrf-token"]').attr('content');
+                var datosFts ={_token:token, idU:$('#id_user').val(), idSucursal:$('#miSucursal').val()}
+                $.post('catalogo/files-serverside/check_formato',datosFts).done(function(data1){ $('#input').val(data1);
                     $('.tabulacion').remove();
-                    $("#miSucursalNS").load('pacientes/genera/genera_sucursales_ov.php?idU='+$('#id_user').val(),function(response,status,xhr){
+                    $("#miSucursalNS").load('catalogo/genera_sucursales_ov?idU='+$('#id_user').val(),function(response,status,xhr){
                         if (status = "success"){
-                            var datosUS = {idU:$('#id_user').val()}
-                            $.post('servicios/servicios/files-serverside/datosSucursalU.php',datosUS).done(function(data){ $("#miSucursalNS").val(data); });
+                            var token = $('meta[name="csrf-token"]').attr('content');
+                            var datosUS = {_token:token, idU:$('#id_user').val()}
+                            $.post('catalogo/files-serverside/datosSucursalU',datosUS).done(function(data){ $("#miSucursalNS").val(data); });
                         }
                     }); $('#idUsuarioE').val($('#id_user').val());
 
@@ -166,7 +183,7 @@
                                 text: 'VPI', icon: false, tooltip: 'Vista previa de impresión',
                                 onclick:function(){
                                     var res = tinyMCE.get("input").getContent().replace(/<p/g, "<div"); res = res.replace(/<\/p>/g, "</div>"); //alert(res);
-                                    $('#dpa_imprimir1').html(res).css('background-image','url(imagenes/vista_previa.png)').css('background-size','65%');
+                                    $('#dpa_imprimir1').html(res).css('background-image','url({{asset('imagenes/vista_previa.png')}})').css('background-size','65%');
                                     $('#dpa_imprimir1').html(res); $('#dpa_imprimir1').printElement();
                                 }
                             });
@@ -178,8 +195,9 @@
                         } else { // everything looks good!
                             e.preventDefault();
                             var $btn = $('#btn_save1').button('loading'); $('#btn_cancel1').hide();
-                            var datosP = $('#myModal #formEstudio').serialize();
-                            $.post('servicios/servicios/files-serverside/addServicio_m.php',datosP).done(function( data ) {
+                            var token = $('meta[name="csrf-token"]').attr('content');
+                            var datosP = $('#myModal #formEstudio').serialize()+"&_token="+token;
+                            $.post('catalogo/files-serverside/addServicio_m',datosP).done(function( data ) {
                                 if (data==1){//si el paciente se Actualizó
                                     $('#clickme').click(); $btn.button('reset'); $('#btn_cancel1').show(); $('#myModal').modal('hide');
                                     swal({ title: "", type: "success", text: "El servicio se ha creado.", timer: 2000, showConfirmButton: false }); return;
@@ -195,11 +213,13 @@
             } });
         }
         function fichaEstudio(idE, nameS){
-            $("#myModal1").load("servicios/servicios/htmls/ficha_servicio_m.php",function(response,status,xhr){ if(status=="success"){
-                $(".insers").load('genera/inserciones.php', function( response, status, xhr ) { if ( status == "success" ) { } });
+            $("#myModal1").load("catalogo/htmls/ficha_servicio_m",function(response,status,xhr){ if(status=="success"){
+                $(".insers").load('catalogo/genera/inserciones', function( response, status, xhr ) { if ( status == "success" ) { } });
                 //Checamos si hay formato de imagen en la sucursal del usuario logueado, sino entonces checamos si hay formato desde configuración, y sino dejar en blanco.
-                var datosFts ={idU:$('#id_user').val(), idSucursal:$('#miSucursal').val(), idE:idE}
-                $.post('servicios/files-serverside/check_formato_individual.php',datosFts).done(function(data1x){ tinymce.remove("#input"); //alert(data1x);
+
+                var token = $('meta[name="csrf-token"]').attr('content');
+                var datosFts ={_token: token, idU:$('#id_user').val(), idSucursal:$('#miSucursal').val(), idE:idE}
+                $.post('catalogo/files-serverside/check_formato_individual',datosFts).done(function(data1x){ tinymce.remove("#input"); //alert(data1x);
                     $('#btn_save1').text('Actualizar'); $('#titulo_modal').text('FICHA DEL SERVICIO MÉDICO: '+nameS);
 
                     tinymce.init({
@@ -216,7 +236,7 @@
                                 text: 'VPI', icon: false, tooltip: 'Vista previa de impresión',
                                 onclick:function(){
                                     var res = tinyMCE.get("input").getContent().replace(/<p/g, "<div"); res = res.replace(/<\/p>/g, "</div>"); //alert(res);
-                                    $('#dpa_imprimir1').html(res).css('background-image','url(imagenes/vista_previa.png)').css('background-size','65%');
+                                    $('#dpa_imprimir1').html(res).css('background-image','url({{asset('imagenes/vista_previa.png')}})').css('background-size','65%');
                                     $('#dpa_imprimir1').html(res); $('#dpa_imprimir1').printElement();
                                 }
                             });
@@ -224,11 +244,12 @@
                     });
                     setTimeout(function(){ tinymce.get("input").execCommand('mceInsertContent', false, data1x); }, 500);
 
-                    var datos ={idE:idE, idSucursal:$('#miSucursal').val()}
-                    $.post('imagen/estudios/files-serverside/fichaEstudio.php',datos).done(function( data1 ) {
+                    var token = $('meta[name="csrf-token"]').attr('content');
+                    var datos ={_token:token, idE:idE, idSucursal:$('#miSucursal').val()}
+                    $.post('catalogo/files-serverside/fichaEstudio',datos).done(function( data1 ) {
                         var datosI = data1.split('*}');
 
-                        $("#miSucursalNS").load('pacientes/genera/genera_sucursales_ov.php?idU='+$('#id_user').val(),function(response,status,xhr){
+                        $("#miSucursalNS").load('catalogo/genera_sucursales_ov?idU='+$('#id_user').val(),function(response,status,xhr){
                             if (status = "success"){ $("#miSucursalNS").val($('#miSucursal').val()); }
                         });
                         $('#idUsuarioE').val($('#id_user').val()); $('#idEstudioE').val(idE);
@@ -243,8 +264,9 @@
                         } else { // everything looks good!
                             e.preventDefault();
                             var $btn = $('#btn_save1').button('loading'); $('#btn_cancel1').hide();
-                            var datosP = $('#myModal1 #formEstudio').serialize();
-                            $.post('servicios/servicios/files-serverside/updateServicio_m.php',datosP).done(function( data ) {
+                            var token = $('meta[name="csrf-token"]').attr('content');
+                            var datosP = $('#myModal1 #formEstudio').serialize()+"&_token="+token;
+                            $.post('catalogo/files-serverside/updateServicio_m',datosP).done(function( data ) {
                                 if (data==1){//si el paciente se Actualizó
                                     $('#clickme').click(); $btn.button('reset'); $('#btn_cancel1').show(); $('#myModal1').modal('hide');
                                     swal({ title: "", type: "success", text: "El servicio se ha actualizado.", timer: 2000, showConfirmButton: false }); return;
