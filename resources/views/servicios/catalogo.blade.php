@@ -34,6 +34,7 @@
     <link href="{{asset('sweetalert/dist/sweetalert.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('chosen/chosen.css')}}">
     <link rel="stylesheet" href="{{asset('chosen/chosen-bootstrap.css')}}">
+    <link href="{{asset('DataTables-1.10.13/extensions/Scroller/css/scroller.bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('jasny-bootstrap/css/jasny-bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('jQuery-TE_v.1.4.0/jquery-te-1.4.0.css')}}" rel="stylesheet">
     <link href="{{asset('c3/c3.css')}}" rel="stylesheet">
@@ -74,6 +75,7 @@
     <div id="auxiliar" class="hidden"></div> <div id="auxiliar1" class="hidden"></div>
     <div class="hidden" id="dpa_imprimir"></div><div class="hidden" id="dpa_imprimir1"></div>
     <!-- FIN Contenido -->
+    <script>breadcrumb(['HOME','RECEPCIÓN','AGENDA'],['index.php']);</script>
 @endsection
 
 @section('scripts')
